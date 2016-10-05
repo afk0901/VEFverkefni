@@ -11,7 +11,7 @@ $pass_login = null;
 
 
 //Verður að skilgreina error array fyrir aðferðina okkar í process.php
-$errors = ['emailerr' => 'Tölvupóstur er tómr eða ekki réttur!', 'nameerr' => 'Nafn vantar!', 'passerr' => 'Lykilorð vantar!', 'wrongpass' => '<p>Rangt notandanafn eða lykilorð!</p>'];
+$errors = ['emailerr' => 'Tölvupóstur er tómur eða ekki réttur!', 'nameerr' => 'Nafn vantar!', 'passerr' => 'Lykilorð vantar!', 'wrongpass' => '<p>Rangt notandanafn eða lykilorð!</p>'];
 
 // check if the form has been submitted
 if (isset($_POST['send_signup'])) {
@@ -39,6 +39,11 @@ $pass_signup = $_POST['pass_signup'];
 }
 
 checkform($required_frm_signup,$expected_frm_signup);
+
+if($name_signup != null && $email_signup != null && $pass_signup != null){
+header("Location: thanksforsignup.php");
+
+}
 }
 
 
@@ -53,7 +58,7 @@ if (isset($_POST['email_login'])) {
 }
 
 checkform($required_frm_login,$expected_frm_login);
-    
+ 
   }
 
 ?>
@@ -95,7 +100,7 @@ include './includes/menu.php';
   ?>
 
      <label for="lykilorð">Lykilorð</label>
-    <input type="text" name="pass_login" class="form-control" placeholder="Lykilorð">
+    <input type="password" name="pass_login" class="form-control" placeholder="Lykilorð">
       
     <?php checkforerror('pass_login','passerr');?>
 
@@ -122,7 +127,7 @@ include './includes/menu.php';
 
    <div class="box col-lg-12">
 
-   <form action="thanksforsignup.php" method="POST">
+   <form action="" method="POST">
     
     <label for="Netfang">Netfang</label>
     <input type="email" name ="email_signup" class="form-control" value="<?php echo $email_signup ?>"  placeholder="Netfang">
